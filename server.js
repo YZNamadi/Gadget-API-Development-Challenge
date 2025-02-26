@@ -1,14 +1,20 @@
-const app = require('./src/app');
-const sequelize = require('./src/config/database');
+
+const express = require('express'); 
+const connectDB = require('./config/database'); 
 require('dotenv').config();
 
-const PORT = process.env.PORT || 3000;
+
+const app = express();
 
 
-sequelize.authenticate()
-  .then(() => console.log('Database connected...'))
-  .catch(err => console.error('Database connection error:', err));
+connectDB();
+
+
+app.use(express.json());
+
+const PORT = process.env.PORT 
+
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+    console.log(`Server running on port ${PORT}`);
 });
